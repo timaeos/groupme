@@ -20,12 +20,12 @@ import (
 	_ "embed"
 	"sync"
 
+	"go.mau.fi/util/configupgrade"
 	"maunium.net/go/mautrix"
 	"maunium.net/go/mautrix/bridge"
 	"maunium.net/go/mautrix/bridge/commands"
 	"maunium.net/go/mautrix/bridge/status"
 	"maunium.net/go/mautrix/id"
-	"maunium.net/go/mautrix/util/configupgrade"
 
 	"github.com/beeper/groupme-lib"
 

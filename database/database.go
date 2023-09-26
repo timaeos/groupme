@@ -21,11 +21,9 @@ import (
 	"net"
 
 	"github.com/lib/pq"
-	_ "github.com/lib/pq"
-	_ "github.com/mattn/go-sqlite3"
 
+	"go.mau.fi/util/dbutil"
 	"maunium.net/go/maulogger/v2"
-	"maunium.net/go/mautrix/util/dbutil"
 
 	"github.com/beeper/groupme/database/upgrades"
 )

@@ -19,9 +19,9 @@ package main
 import (
 	"fmt"
 
+	"go.mau.fi/util/variationselector"
 	"maunium.net/go/mautrix/event"
 	"maunium.net/go/mautrix/format"
-	"maunium.net/go/mautrix/util/variationselector"
 )
 
 const formatterContextAllowedMentionsKey = "com.beeper.groupme.allowed_mentions"

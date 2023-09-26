@@ -25,6 +25,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/rs/zerolog"
 	log "maunium.net/go/maulogger/v2"
 	"maunium.net/go/mautrix"
 	"maunium.net/go/mautrix/appservice"
@@ -45,6 +46,7 @@ type User struct {
 	Conn *groupme.PushSubscription
 
 	bridge *GMBridge
+	zlog   zerolog.Logger
 	log    log.Logger
 
 	Admin           bool
@@ -435,30 +437,6 @@ func (user *User) PostLogin() {
 	user.bridge.Metrics.TrackLoginState(user.GMID, true)
 	user.bridge.Metrics.TrackBufferLength(user.MXID, 0)
 	// go user.intPostLogin()
-}
-
-func (user *User) tryAutomaticDoublePuppeting() {
-	if !user.bridge.Config.CanAutoDoublePuppet(user.MXID) {
-		return
-	}
-	user.log.Debugln("Checking if double puppeting needs to be enabled")
-	puppet := user.bridge.GetPuppetByGMID(user.GMID)
-	if len(puppet.CustomMXID) > 0 {
-		user.log.Debugln("User already has double-puppeting enabled")
-		// Custom puppet already enabled
-		return
-	}
-	accessToken, err := puppet.loginWithSharedSecret(user.MXID)
-	if err != nil {
-		user.log.Warnln("Failed to login with shared secret:", err)
-		return
-	}
-	err = puppet.SwitchCustomMXID(accessToken, user.MXID)
-	if err != nil {
-		puppet.log.Warnln("Failed to switch to auto-logined custom puppet:", err)
-		return
-	}
-	user.log.Infoln("Successfully automatically enabled custom puppet")
 }
 
 func (user *User) sendBridgeNotice(formatString string, args ...interface{}) {

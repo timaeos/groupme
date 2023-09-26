@@ -69,9 +69,7 @@ type BridgeConfig struct {
 		Deferred []DeferredConfig `yaml:"deferred"`
 	} `yaml:"history_sync"`
 
-	DoublePuppetServerMap      map[string]string `yaml:"double_puppet_server_map"`
-	DoublePuppetAllowDiscovery bool              `yaml:"double_puppet_allow_discovery"`
-	LoginSharedSecretMap       map[string]string `yaml:"login_shared_secret_map"`
+	DoublePuppetConfig bridgeconfig.DoublePuppetConfig `yaml:",inline"`
 
 	ResendBridgeInfo bool `yaml:"resend_bridge_info"`
 
@@ -102,6 +100,10 @@ type BridgeConfig struct {
 
 	ParsedUsernameTemplate *template.Template `yaml:"-"`
 	displaynameTemplate    *template.Template `yaml:"-"`
+}
+
+func (bc BridgeConfig) GetDoublePuppetConfig() bridgeconfig.DoublePuppetConfig {
+	return bc.DoublePuppetConfig
 }
 
 func (bc BridgeConfig) GetEncryptionConfig() bridgeconfig.EncryptionConfig {
