@@ -1,5 +1,5 @@
-// mautrix-whatsapp - A Matrix-WhatsApp puppeting bridge.
-// Copyright (C) 2021 Tulir Asokan
+// mautrix-groupme - A Matrix-GroupMe puppeting bridge.
+// Copyright (C) 2023 Sumner Evans, Karmanyaah Malhotra, Tulir Asokan, Timothy Arnold
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
